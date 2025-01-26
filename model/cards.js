@@ -54,10 +54,10 @@ const cardSchema = new mongoose.Schema({
   },
   bizNumber: {
     type: Number,
-    required: true,
     min: 100,
     max: 9_999_999_999,
     unique: true,
+    defualt: generateBizNumber,
   },
   user_id: {
     type: mongoose.Schema.Types.ObjectId,

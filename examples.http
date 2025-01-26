@@ -18,7 +18,7 @@ POST {{local}}/api/auth/
 Content-Type: application/json
 
 {
-    "email": "tom13@gmail.com",
+    "email": "admin@admin.com",
     "password":"Aa123456"
     }
 
@@ -60,7 +60,7 @@ Content-Type: application/json
 "subtitle":"hahaha",
 "description":"haha",
 "phone":"052333333",
-"email":"tom2@gmail.com",
+"email":"tom210@gmail.com",
 "web":"www.store.co.il",
 "image":{
     "url":"www.gg.com",
