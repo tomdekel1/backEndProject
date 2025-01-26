@@ -22,7 +22,7 @@ connect();
 async function connect() {
   try {
     await mongoose.connect(
-      "mongodb+srv://Tom123:Tom123@tomscluster.udzul.mongodb.net/DB?retryWrites=true&w=majority&appName=tomscluster"
+      "mongodb://localhost:27017/myRestAPI"
     );
     console.log("conected to db");
     app.listen(PORT, () => {
