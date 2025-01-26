@@ -21,13 +21,7 @@ connect();
 
 async function connect() {
   try {
-<<<<<<< HEAD
     await mongoose.connect("mongodb://localhost:27017/myRestAPI");
-=======
-    await mongoose.connect(
-      "mongodb://localhost:27017/myRestAPI"
-    );
->>>>>>> 61852d1b8e050b1491bd4a42daa1fa85a2b41d20
     console.log("conected to db");
     app.listen(PORT, () => {
       console.log("server is listening");
