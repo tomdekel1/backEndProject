@@ -37,22 +37,22 @@ Now, the API should be running on `http://localhost:3000` (or your configured po
 
 ### Users Endpoints
 
-| No. | URL          | Method | Authorization             | Action                        | Notice           | Return            |
-|-----|--------------|--------|---------------------------|-------------------------------|------------------|-------------------|
-| 1.  | /users       | POST   | all                       | Register user                 | Unique email     | Success (1)       |
-| 2.  | /users/auth  | POST   | all                       | Login                         | Encrypted token  |                   |
-| 3.  | /users       | GET    | admin                     | Get all users                 |                  | Array of users    |
-| 4.  | /users/:id   | GET    | The registered user/admin | Get user                      |                  | User              |
-| 5.  | /users/:id   | PUT    | The registered user/admin | Edit user                     |                  | User              |
-| 6.  | /users/:id   | PATCH  | The registered user/admin | Change `isBusiness` status    |                  | User              |
-| 7.  | /users/:id   | DELETE | The registered user/admin | Delete user                   |                  | Deleted user      |
+| No. | URL          | Method | Authorization             | Action                        | Notice                  | Return            |
+|-----|--------------|--------|---------------------------|-------------------------------|------------------------ |-------------------|
+| 1.  | /users       | POST   | all                       | Register user                 | Unique email            | Success (1)       |
+| 2.  | /auth        | POST   | all                       | Login                         | credentials             |  Encrypted token  |
+| 3.  | /users       | GET    | admin                     | Get all users                 |                         | Array of users    |
+| 4.  | /users/:id   | GET    | The registered user/admin | Get user                      |                         | User              |
+| 5.  | /users/:id   | PUT    | The registered user/admin | Edit user                     | name,phone,address,image| User              |
+| 6.  | /users/:id   | PATCH  | The registered user/admin | Change `isBusiness` status    | reverse current status  | User              |
+| 7.  | /users/:id   | DELETE | The registered user/admin | Delete user                   |                         | Deleted user      |
 
 ---
 
 ### Cards Endpoints
 | No. | URL               | Method | Authorization                | Action           | Return           |
 |-----|-------------------|--------|------------------------------|------------------|------------------|
-| 1.  | /cards            | GET    | all                          | All cards        | List of cards    |
+| 1.  | /cards            | GET    | all                          | All cards        | Array of cards   |
 | 2.  | /cards/my-cards   | GET    | The registered user          | Get user cards   | Array of cards   |
 | 3.  | /cards/:id        | GET    | all                          | Get card         | Card             |
 | 4.  | /cards            | POST   | Business user                | Create new card  | Card             |
