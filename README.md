@@ -39,7 +39,7 @@ Now, the API should be running on `http://localhost:3000` (or your configured po
 
 | No. | URL          | Method | Authorization             | Action                        | Notice                  | Return            |
 |-----|--------------|--------|---------------------------|-------------------------------|------------------------ |-------------------|
-| 1.  | /users       | POST   | all                       | Register user                 | Unique email            | Success (1)       |
+| 1.  | /users       | POST   | all                       | Register user                 | Unique email            | the user created  |
 | 2.  | /auth        | POST   | all                       | Login                         | credentials             |  Encrypted token  |
 | 3.  | /users       | GET    | admin                     | Get all users                 |                         | Array of users    |
 | 4.  | /users/:id   | GET    | The registered user/admin | Get user                      |                         | User              |
@@ -50,16 +50,19 @@ Now, the API should be running on `http://localhost:3000` (or your configured po
 ---
 
 ### Cards Endpoints
-| No. | URL               | Method | Authorization                | Action           | Return           |
-|-----|-------------------|--------|------------------------------|------------------|------------------|
-| 1.  | /cards            | GET    | all                          | All cards        | Array of cards   |
-| 2.  | /cards/my-cards   | GET    | The registered user          | Get user cards   | Array of cards   |
-| 3.  | /cards/:id        | GET    | all                          | Get card         | Card             |
-| 4.  | /cards            | POST   | Business user                | Create new card  | Card             |
-| 5.  | /cards/:id        | PUT    | The original user/admin      | Edit card        | Card             |
-| 6.  | /cards/:id        | PATCH  | A registered user            | Like card        | Card             |
-| 7.  | /cards/:id        | DELETE | The original user/admin      | Delete card      | Deleted card     |
+| No. | URL                        | Method | Authorization                | Action           | Return           |
+|-----|----------------------------|--------|------------------------------|------------------|------------------|
+| 1.  | /cards                     | GET    | all                          | All cards        | Array of cards   |
+| 2.  | /cards/my-cards            | GET    | The registered user          | Get user cards   | Array of cards   |
+| 3.  | /cards/:id                 | GET    | all                          | Get card         | Card             |
+| 4.  | /cards                     | POST   | Business user                | Create new card  | Card             |
+| 5.  | /cards/:id                 | PUT    | The original user/admin      | Edit card        | updated Card     |
+| 6.  | /cards/:id                 | PATCH  | A registered user            | Like card        | Card             |
+| 7.  | /cards/:id                 | DELETE | The original user/admin      | Delete card      | Deleted card     |
 
+**bonus
+| 8.  | /cards/biznumberchange/:id | PATCH  | admin                        | change biz number| updated card     |
+request body example: {"newBizNumber":"111111111"}
 ---
 
 
