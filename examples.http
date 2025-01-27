@@ -1,6 +1,7 @@
 @local=http://localhost:4000
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzg4ZjNjNGI5ZDU1ZTMwMmYzMDYyMWEiLCJiaXoiOnRydWUsImlhdCI6MTczNzQ3MDY5NX0.8rsjG6y3AA-gU0siojzM7ECt_tRwXWhQMdu54w-OdeA
-@adminToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc5MWM3NjY2NDc3OGQzMjFjZDM3ZTciLCJiaXoiOnRydWUsImlhdCI6MTczNTk5MDQzOX0.ybGlsw6CNfwIlm8aZHxMXmWFb7heHfV_q-mEqCOP9YU
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzk3OTI4YjYzYmM3Yjg2OGRiZDY2NDkiLCJiaXoiOmZhbHNlLCJpYXQiOjE3Mzc5ODcyMjh9.yIj1WUszf4pS16MIodzqX95gxQLo7A_DrfuJ7L6QcVM
+@bizToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzk3OTI4YjYzYmM3Yjg2OGRiZDY2NDgiLCJiaXoiOnRydWUsImlhdCI6MTczNzk4NzI5NX0.jMiqEqAnFdn-Bh2cEVWlr9JYA_s4DPAucmEc-9flw4g
+@adminToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzk3OTI4YjYzYmM3Yjg2OGRiZDY2NDciLCJiaXoiOnRydWUsImlhdCI6MTczNzk4NzE4NX0.8DpiVQIlyrFHgVj11FIEHj1KZllcQWYenR_i_CQ3chg
 
 POST {{local}}/api/users/
 Content-Type: application/json
@@ -9,7 +10,7 @@ Content-Type: application/json
 "phone":"1231231233",
 "address":{"state":"asdasd","country":"asd","city":"asd","street":"sasd","houseNumber":"asd","zip":"asd"},
 "image":{"url":"asdasd","alt":"asdads"},
-"email":"tom20@gmail.com",
+"email":"tom1@gmail.com",
 "password":"Aa123456",
 "biz":"true"}
 
@@ -18,41 +19,52 @@ POST {{local}}/api/auth/
 Content-Type: application/json
 
 {
-    "email": "admin@admin.com",
+    "email": "biz@biz.com",
     "password":"Aa123456"
     }
 
-###
-GET {{local}}/api/users/6774485859c9fe8b178d8ff6
-x-auth-token: {{adminToken}}
 ###
 GET {{local}}/api/users/
 x-auth-token:{{adminToken}}
 
 ###
-PUT {{local}}/api/users/67791bba664778d321cd37e4
+GET {{local}}/api/users/6797928b63bc7b868dbd6648
+x-auth-token: {{bizToken}}
+
+###
+PUT {{local}}/api/users/6797928b63bc7b868dbd6649
 x-auth-token: {{token}}
 Content-Type: application/json
 
 {
-    "name":{"first":"tommmmm","middle":"","last":"dekel"},
+    "name":{"first":"tommmmmm","middle":"","last":"dekel"},
 "phone":"322222ss33",
 "address":{"state":"asdasd","country":"asd","city":"asd","street":"sasd","houseNumber":"asd","zip":"asd"},
 "image":{"url":"asdasd","alt":"asdads"}
 }
 
 ###
-PATCH {{local}}/api/users/676e63279dee467bd140d642
+PATCH {{local}}/api/users/6797928b63bc7b868dbd6649
 x-auth-token: {{token}}
 Content-Type: application/json
 
 ###
-DELETE {{local}}/api/users/6788f3cdb9d55e302f30621e
-x-auth-token: {{adminToken}}
+DELETE {{local}}/api/users/67979b3a5524e1fd0a34e9d4
+x-auth-token: {{token}}
+
+###
+GET {{local}}/api/cards/
+
+###
+GET {{local}}/api/cards/my-cards
+x-auth-token: {{bizToken}}
+
+###
+GET {{local}}/api/cards/6797928b63bc7b868dbd664b
 
 ###
 POST {{local}}/api/cards/
-x-auth-token: {{token}}
+x-auth-token: {{bizToken}}
 Content-Type: application/json
 
 {
@@ -60,7 +72,7 @@ Content-Type: application/json
 "subtitle":"hahaha",
 "description":"haha",
 "phone":"052333333",
-"email":"tom210@gmail.com",
+"email":"tom21@gmail.com",
 "web":"www.store.co.il",
 "image":{
     "url":"www.gg.com",
@@ -77,18 +89,8 @@ Content-Type: application/json
 }
 
 ###
-GET {{local}}/api/cards/
-
-###
-GET {{local}}/api/cards/678f939faff2c772dfdc66b3
-
-###
-GET {{local}}/api/cards/my-cards
-x-auth-token: {{token}}
-
-###
-PUT {{local}}/api/cards/678fa0fdff87c76f8fd67fe1
-x-auth-token: {{token}}
+PUT {{local}}/api/cards/6797a0f3be38cf818b6515e5
+x-auth-token: {{adminToken}}
 Content-Type: application/json
 
 {
@@ -112,16 +114,16 @@ Content-Type: application/json
 }
 
 ###
-PATCH {{local}}/api/cards/678fa0fdff87c76f8fd67fe1
-x-auth-token: {{adminToken}}
+PATCH {{local}}/api/cards/6797a0f3be38cf818b6515e5
+x-auth-token: {{token}}
 
 ###
-DELETE {{local}}/api/cards/678fa0fdff87c76f8fd67fe1
+DELETE {{local}}/api/cards/67979d595524e1fd0a34e9df
 x-auth-token:{{adminToken}}
 
 ###
-PATCH {{local}}/api/cards/biznumberchange/678f939faff2c772dfdc66b3
-x-auth-token:{{token}}
+PATCH {{local}}/api/cards/biznumberchange/6797928b63bc7b868dbd664c
+x-auth-token:{{adminToken}}
 Content-Type: application/json
 
 {

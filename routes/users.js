@@ -18,7 +18,7 @@ router.get("/", authMW, async (req, res) => {
     return;
   }
   const allUsers = await User.find({}, { password: 0 });
-  res.json(allUsers);
+  res.status(200).json(allUsers);
 });
 
 // get user details
@@ -26,12 +26,12 @@ router.get("/:id", authMW, validateUserIdMW, async (req, res) => {
   try {
     let user = await User.findById(req.params.id, { password: 0 });
     if (!user) {
-      res.send("wrong id, user does not exist");
+      res.status(400).send("wrong id, user does not exist");
       return;
     }
     res.json(user);
   } catch (err) {
-    res.send(err.message);
+    res.status(400).send(err.message);
     return;
   }
 });
@@ -59,23 +59,38 @@ router.post("/", async (req, res) => {
   const userData = _.pick(user, ["name", "email", "_id", "biz"]);
   // response
 
-  res.json(userData);
+  res.status(201).json(userData);
 });
 
 // update user info
 router.put("/:id", authMW, validateUserIdMW, async (req, res) => {
   const { error } = validateUserUpdate(req.body);
   if (error) {
-    res.send(error.message);
+    res.status(400).send(error.message);
     return;
   }
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+    let updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    res.send(updatedUser);
+    if (!updatedUser) {
+      res.status(404).send("user not found");
+      return;
+    }
+
+    updatedUser = _.pick(updatedUser, [
+      "name",
+      "address",
+      "image",
+      "_id",
+      "phone",
+      "email",
+      "biz",
+    ]);
+
+    res.status(200).send(updatedUser);
   } catch (err) {
-    res.send(err.message);
+    res.status(400).send(err.message);
     console.log("catched err");
   }
 });
@@ -101,20 +116,29 @@ router.patch("/:id", authMW, validateUserIdMW, async (req, res) => {
     "email",
     "biz",
   ]);
-  res.json(updatedUser);
+  res.status(200).json(updatedUser);
 });
 
 router.delete("/:id", authMW, validateUserIdMW, async (req, res) => {
   try {
-    const user = await User.findByIdAndDelete(req.params.id);
+    let user = await User.findByIdAndDelete(req.params.id);
     if (!user) {
       res.status(400).send("user not found");
       return;
     }
-    res.send(user);
+    user = _.pick(user, [
+      "name",
+      "address",
+      "image",
+      "_id",
+      "phone",
+      "email",
+      "biz",
+    ]);
+    res.status(200).json(user);
     return;
   } catch (e) {
-    res.send(e.message);
+    res.status(400).send(e.message);
     return;
   }
 });

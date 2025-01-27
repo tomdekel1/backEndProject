@@ -34,20 +34,29 @@ router.post("/", authMW, async (req, res) => {
       bizNumber: await generateBizNumber(),
     }).save();
 
-    res.json(card);
+    res.status(201).json(card);
   } catch (e) {
-    res.send(e);
+    res.status(400).send(e);
     return;
   }
 });
 
 router.get("/", async (req, res) => {
-  res.send(await Card.find());
+  try {
+    res.status(200).send(await Card.find());
+  } catch (e) {
+    res.status(400).send(e.message);
+    return;
+  }
 });
 
 router.get("/my-cards", authMW, async (req, res) => {
+  if (req.user.biz == false) {
+    res.status(400).send("this user is not a business user");
+    return;
+  }
   const userCards = await Card.find({ user_id: req.user._id });
-  res.send(userCards);
+  res.status(200).json(userCards);
   return;
 });
 
@@ -58,7 +67,7 @@ router.get("/:id", async (req, res) => {
       res.status(404).send("card not found");
       return;
     }
-    res.send(card);
+    res.status(200).json(card);
     return;
   } catch (e) {
     res.status(400).send(e);
@@ -76,9 +85,9 @@ router.put("/:id", authMW, validateCardAuthor, async (req, res) => {
     let updatedCard = await Card.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    res.send(updatedCard);
+    res.status(200).json(updatedCard);
   } catch (e) {
-    res.send(e.message);
+    res.status(400).send(e.message);
     return;
   }
 });
@@ -88,7 +97,7 @@ router.patch("/:id", authMW, async (req, res) => {
   try {
     card = await Card.findById(req.params.id);
   } catch (e) {
-    res.send(e.message);
+    res.status(400).send(e.message);
     return;
   }
 
@@ -104,8 +113,7 @@ router.patch("/:id", authMW, async (req, res) => {
       { likes: newLikesArray },
       { new: true }
     );
-    console.log("remove");
-    res.send(card);
+    res.status(200).json(card);
     return;
   }
 
@@ -114,18 +122,17 @@ router.patch("/:id", authMW, async (req, res) => {
     { likes: [...card.likes, req.user._id] },
     { new: true }
   );
-  console.log("add");
-  res.send(card);
+  res.status(200).json(card);
 });
 
 router.delete("/:id", authMW, validateCardAuthor, async (req, res) => {
   let card;
   try {
     card = await Card.findByIdAndDelete(req.params.id);
-    res.send(card);
+    res.status(200).json(card);
     return;
   } catch (e) {
-    res.send(e.message);
+    res.status(400).send(e.message);
     return;
   }
 });
@@ -151,7 +158,7 @@ router.patch("/biznumberchange/:id", authMW, async (req, res) => {
       return;
     }
   } catch (e) {
-    res.send(e.message);
+    res.status(400).send(e.message);
     return;
   }
   let newBizCard = await Card.findByIdAndUpdate(
@@ -166,7 +173,7 @@ router.patch("/biznumberchange/:id", authMW, async (req, res) => {
     return;
   }
   console.log(newBizCard);
-  res.send(newBizCard);
+  res.status(200).json(newBizCard);
 });
 
 module.exports = router;
