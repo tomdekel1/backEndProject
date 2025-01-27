@@ -40,7 +40,7 @@ Now, the API should be running on `http://localhost:3000` (or your configured po
 | No. | URL          | Method | Authorization             | Action                        | Notice           | Return            |
 |-----|--------------|--------|---------------------------|-------------------------------|------------------|-------------------|
 | 1.  | /users       | POST   | all                       | Register user                 | Unique email     | Success (1)       |
-| 2.  | /users/login | POST   | all                       | Login                         | Encrypted token  |                   |
+| 2.  | /users/auth  | POST   | all                       | Login                         | Encrypted token  |                   |
 | 3.  | /users       | GET    | admin                     | Get all users                 |                  | Array of users    |
 | 4.  | /users/:id   | GET    | The registered user/admin | Get user                      |                  | User              |
 | 5.  | /users/:id   | PUT    | The registered user/admin | Edit user                     |                  | User              |
