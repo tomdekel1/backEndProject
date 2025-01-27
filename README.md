@@ -61,7 +61,9 @@ Now, the API should be running on `http://localhost:3000` (or your configured po
 | 7.  | /cards/:id                 | DELETE | The original user/admin      | Delete card      | Deleted card     |
 
 **bonus
+
 | 8.  | /cards/biznumberchange/:id | PATCH  | admin                        | change biz number| updated card     |
+
 request body example: {"newBizNumber":"111111111"}
 ---
 
