@@ -33,9 +33,10 @@ To run this project locally, follow the steps below:
 Now, the API should be running on `http://localhost:3000` (or your configured port).
 
 ## API Endpoints
-
+### all endpoints must start with /api/
 
 ### Users Endpoints
+
 | No. | URL          | Method | Authorization             | Action                        | Notice           | Return            |
 |-----|--------------|--------|---------------------------|-------------------------------|------------------|-------------------|
 | 1.  | /users       | POST   | all                       | Register user                 | Unique email     | Success (1)       |
