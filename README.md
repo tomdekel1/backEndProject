@@ -63,8 +63,7 @@ Now, the API should be running on `http://localhost:3000` (or your configured po
 ***bonus
 
 | 8.    | /cards/biznumberchange/:id   | PATCH    | admin                        | change biz number   | updated card       |
-
-request body example: {"newBizNumber":"111111111"}
+***request body example: {"newBizNumber":"111111111"}
 ---
 
 
