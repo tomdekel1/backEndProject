@@ -43,7 +43,7 @@ router.post("/", authMW, async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    res.status(200).send(await Card.find());
+    res.status(200).json(await Card.find());
   } catch (e) {
     res.status(400).send(e.message);
     return;
